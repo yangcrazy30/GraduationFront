@@ -8,7 +8,9 @@
         <div class="login">
           <i class="iconfont icon-touxiang1" @click="jumpToProfile"></i>
           <span @click="jumpToLogin" v-if="username === ''">
-            <span>my</span><strong>UJSOnline</strong><span>connection</span>
+            <span>my</span>
+            <strong>UJSOnline</strong>
+            <span>connection</span>
           </span>
           <span v-else @click="jumpToProfile">
             <strong>{{ username }}</strong>
@@ -74,12 +76,24 @@ export default {
 };
 </script>
 
-<style scoped>
-@import "common/css/reset.css";
+
+<style>
 body {
+  margin: 0;
+  padding: 0;
   font-family: "Source Sans Pro", Tahoma, Verdana, sans-serif;
 }
 
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+</style>
+
+<style scoped>
 #app {
   display: flex;
   flex-direction: column;

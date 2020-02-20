@@ -6,12 +6,7 @@ import router from "./router/index";
 import store from "./store/index";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
-import $ from "jquery";
-import "bootstrap";
-import ViewUI from "view-design";
-import "view-design/dist/styles/iview.css";
 
-Vue.use(ViewUI);
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
 
