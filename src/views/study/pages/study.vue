@@ -5,7 +5,6 @@
         <el-menu-item index="bbs">BBS</el-menu-item>
         <el-menu-item index="resource">Resource</el-menu-item>
         <el-menu-item index="homework">Homework</el-menu-item>
-        <el-menu-item index="study">Home</el-menu-item>
       </el-menu>
     </header>
     <div>
