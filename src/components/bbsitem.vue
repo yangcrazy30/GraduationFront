@@ -10,7 +10,7 @@
       <i
         class="iconfont icon-diancai1-copy-copy"
         :style="{ color: like ? 'red' : 'gray' }"
-        @click="handleLike"
+        @click.stop="handleLike"
       ></i>
       <span v-show="data.like !== 0">{{ data.like }}</span>
       <span>{{ data.username }}</span>
