@@ -2,7 +2,6 @@
   <div class="content">
     <header>
       <el-button type="primary" @click="upload">上传</el-button>
-      <el-button type="primary" @click="download">下载</el-button>
     </header>
     <ul class="main">
       <slot></slot>
@@ -21,15 +20,16 @@ export default {
   methods: {
     upload() {
       this.$emit("upload");
-    },
-    download() {
-      console.log("downlaod");
     }
   }
 };
 </script>
 
 <style scoped>
+.el-button--primary /deep/ {
+  margin: 0.5rem;
+}
+
 ul {
   margin-block-start: 0;
 }

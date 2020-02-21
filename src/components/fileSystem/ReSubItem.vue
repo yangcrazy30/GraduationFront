@@ -4,7 +4,7 @@
       <Icon :iconClass="data.type">{{ data.name }}</Icon>
     </template>
     <template v-for="child in data.children">
-      <FileItem :key="child.id" v-if="!child.children">
+      <FileItem :file="child" :key="child.id" v-if="!child.children">
         <Icon :iconClass="child.type"> {{ child.name }}</Icon>
       </FileItem>
       <ReSubItem v-else :key="child.id" :data="child"></ReSubItem>
@@ -29,7 +29,8 @@ export default {
       default: () => {
         return {};
       }
-    }
+    },
+    methods: {}
   },
   data() {
     return {};

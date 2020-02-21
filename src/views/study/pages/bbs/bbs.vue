@@ -3,10 +3,17 @@
     <div class="button">
       <el-input v-model="saerchkeyword" placeholder="请输入帖子名"></el-input>
       <el-button type="primary" @click>Search</el-button>
-      <el-button style="float:right" type="primary" @click="dialogshow=true">new</el-button>
+      <el-button style="float:right" type="primary" @click="dialogshow = true"
+        >new</el-button
+      >
     </div>
     <ul>
-      <li class="post" v-for="item in posts" :key="item.id" :data-index="item.id">
+      <li
+        class="post"
+        v-for="item in posts"
+        :key="item.id"
+        :data-index="item.id"
+      >
         <BbsItem :data="item"></BbsItem>
       </li>
     </ul>
@@ -18,17 +25,21 @@
       @current-change="handleCurrentChange"
       :total="total"
     ></el-pagination>
-    <el-dialog title="New Post" :visible.sync=" dialogshow" width="30%">
+    <el-dialog title="New Post" :visible.sync="dialogshow" width="30%">
       <el-form :model="form" ref="form" label-width="80px">
         <el-form-item label="Title">
           <el-input v-model="form.title" placeholder></el-input>
         </el-form-item>
         <el-form-item label="Content">
-          <el-input type="textarea" v-model="form.content" placeholder="Content"></el-input>
+          <el-input
+            type="textarea"
+            v-model="form.content"
+            placeholder="Content"
+          ></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer">
-        <el-button @click=" dialogshow= false">取 消</el-button>
+        <el-button @click="dialogshow = false">取 消</el-button>
         <el-button type="primary" @click="handlePost">确 定</el-button>
       </span>
     </el-dialog>
@@ -87,10 +98,17 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
 
 <style scoped>
+li {
+  list-style: none;
+}
+
+ul {
+  padding-inline-start: 0;
+}
+
 .el-input {
   width: auto;
 }

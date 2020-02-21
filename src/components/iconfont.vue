@@ -1,7 +1,7 @@
 <template>
   <div class="iconbody">
     <svg class="icon" aria-hidden="true">
-      <use :xlink:href="iconTag"></use>
+      <use :xlink:href="iconTag ? iconTag : 'unknow'"></use>
     </svg>
     <slot></slot>
   </div>

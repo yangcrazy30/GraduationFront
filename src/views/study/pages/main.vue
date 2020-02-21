@@ -1,5 +1,9 @@
 <template>
   <div>
-    123
+    <p>
+      <span style="margin:1rem;">
+        Welcome
+      </span>
+    </p>
   </div>
 </template>
