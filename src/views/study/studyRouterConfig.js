@@ -4,6 +4,7 @@ import BBS from "views/study/pages/bbs/bbs";
 import Resource from "views/study/pages/resource/resource";
 import Main from "views/study/pages/main";
 import BbsDetail from "views/study/pages/bbs/bbsdetail";
+import HomeworkDetail from "views/study/pages/homework/homeworkdetail"
 export default {
   path: "/study/:id",
   component: Study,
@@ -27,6 +28,11 @@ export default {
       path: "bbs/detail/:postid",
       name: "bbsdetail",
       component: BbsDetail
+    },
+    {
+      path: "homework/detail/:homeworkid",
+      name: "homeworkdetail",
+      component: HomeworkDetail
     },
     {
       name: "resource",
