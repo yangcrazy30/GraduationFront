@@ -1,6 +1,9 @@
 <template>
-  <div class="box">
-    <div class="leftbar"></div>
+  <div class="content">
+    <div
+      :style="{ backgroundImage: 'url(' + userInfo.avatar + ')' }"
+      class="leftbar"
+    ></div>
     <div class="rightbar">
       <span>{{ userInfo.username }}</span>
     </div>
@@ -20,7 +23,7 @@ export default {
 </script>
 
 <style scoped>
-.box {
+.content {
   display: flex;
   flex-direction: row;
   height: 50px;
@@ -30,6 +33,9 @@ export default {
 .leftbar {
   height: 50px;
   width: 50px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .rightbar {

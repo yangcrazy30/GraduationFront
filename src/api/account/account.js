@@ -23,3 +23,19 @@ export function getInfo() {
 export function updateUserInfo(userinfo) {
   return axios.post("/users/userinfo", userinfo);
 }
+
+export function getUserinfo(email) {
+  return axios.get("/users/uibyemail", {
+    params: {
+      email: email
+    }
+  })
+}
+
+export function getUserinfoByid(id) {
+  return axios.get("/users/uibyid", {
+    params: {
+      id: id
+    }
+  })
+}

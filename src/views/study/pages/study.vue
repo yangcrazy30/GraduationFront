@@ -1,10 +1,15 @@
 <template>
   <div class="mainarea">
     <header>
-      <el-menu :default-active="activeIndex" mode="horizontal" @select="handleSelect">
+      <el-menu
+        :default-active="activeIndex"
+        mode="horizontal"
+        @select="handleSelect"
+      >
         <el-menu-item index="bbs">BBS</el-menu-item>
         <el-menu-item index="resource">Resource</el-menu-item>
         <el-menu-item index="homework">Homework</el-menu-item>
+        <el-menu-item index="question" v-if="isStudent">Question</el-menu-item>
       </el-menu>
     </header>
     <div>
@@ -18,8 +23,12 @@ export default {
   data() {
     return {
       course: null,
-      activeIndex: "main"
+      activeIndex: "main",
+      isStudent: false
     };
+  },
+  created() {
+    this.isStudent = this.$store.state.account.role === "student";
   },
   methods: {
     handleSelect(key, keyPath) {

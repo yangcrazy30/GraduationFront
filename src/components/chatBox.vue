@@ -1,17 +1,17 @@
 <template>
   <div class="box">
     <div class="head">
-      <span>{{ Name }}</span>
-      <span>{{ Time }}</span>
+      <span style="font-size:10px;">{{ Time }}</span>
     </div>
-    <div class="content">{{ Content }}</div>
+    <div class="content">
+      <span>{{ Content }}</span>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    Name: String,
     Time: String,
     Content: String
   }
@@ -19,6 +19,10 @@ export default {
 </script>
 
 <style scoped>
+.head {
+  padding: 5px;
+}
+
 span {
   font-size: 15px;
   margin: 5px 5px;
@@ -31,9 +35,11 @@ span {
 }
 .box {
   border-radius: 10px;
-  width: 30%;
+  width: 25%;
   height: auto;
   min-height: 100px;
-  margin: 5px 1px;
+  margin: 10px 5px;
+  display: flex;
+  flex-direction: column;
 }
 </style>

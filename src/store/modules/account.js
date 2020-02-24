@@ -5,7 +5,8 @@ const state = {
   username: "",
   role: "",
   email: "",
-  avatar: ""
+  avatar: "",
+  id: ""
 };
 
 const getters = {
@@ -50,12 +51,14 @@ const mutations = {
     state.username = payload.username;
     state.role = payload.role;
     state.avatar = payload.avatar;
+    state.id = payload.id;
   },
   logout(state) {
     state.username = "";
     state.role = "";
     state.email = "";
     state.avatar = "";
+    state.id = "";
     localStorage.clear();
   }
 };

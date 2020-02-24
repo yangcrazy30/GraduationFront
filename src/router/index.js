@@ -8,8 +8,8 @@ import store from "@/store/index";
 import homeRouterConfig from "views/home/homeRouterConfig";
 import courseRouterConfig from "views/course/courseRouterConfig";
 import loginRouterConfig from "views/login/loginRouterConfig";
-import managementRouterConfig from "views/management/managementRouterConfig";
 import studyRouterConfig from "views/study/studyRouterConfig";
+import settingRouterConfig from "views/setting/settingRouterConfig";
 
 Vue.use(Router);
 
@@ -20,7 +20,7 @@ const router = new Router({
     ...homeRouterConfig,
     ...courseRouterConfig,
     ...loginRouterConfig,
-    managementRouterConfig,
+    settingRouterConfig,
     studyRouterConfig
   ]
 });

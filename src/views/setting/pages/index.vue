@@ -59,7 +59,7 @@ export default {
 .setting {
   display: flex;
   flex-direction: row;
-  min-height: calc(100vh - 209px);
+  height: calc(100vh - 209px);
   justify-content: center;
 }
 

@@ -5,6 +5,7 @@ import Resource from "views/study/pages/resource/resource";
 import Main from "views/study/pages/main";
 import BbsDetail from "views/study/pages/bbs/bbsdetail";
 import HomeworkDetail from "views/study/pages/homework/homeworkdetail"
+import Question from "views/study/pages/question/question";
 export default {
   path: "/study/:id",
   component: Study,
@@ -13,6 +14,11 @@ export default {
       name: "study",
       path: "/",
       component: Main
+    },
+    {
+      name: 'question',
+      path: "question",
+      component: Question
     },
     {
       name: "homework",

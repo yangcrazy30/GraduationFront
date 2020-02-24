@@ -12,15 +12,14 @@
       <div class="chathead">
         <span>{{ currentChat.username }}</span>
       </div>
-      <div class="chatarea">
-        <Chatbox
+      <div class="chatarea" id="msg">
+        <chatBox
           v-for="chatbox in chats"
-          :Name="chatbox.name"
-          :Time="chatbox.fmtime"
+          :Time="chatbox.time"
           :Content="chatbox.message"
           :key="chatbox.id"
           v-bind:class="select(chatbox)"
-        ></Chatbox>
+        ></chatBox>
       </div>
       <div class="foot">
         <div class="inputitem" style="flex-basis:75%">
@@ -31,7 +30,7 @@
           ></el-input>
         </div>
         <div class="inputitem" style="flex-basis:25%">
-          <el-button type="primary" @click="">Send</el-button>
+          <el-button type="primary" @click="sendMessage">Send</el-button>
         </div>
       </div>
     </div>
@@ -41,23 +40,31 @@
 <script>
 import chatRemain from "components/chatRemain";
 import chatBox from "components/chatBox";
+import { getCourseById } from "api/course/course";
+import { getUserinfo } from "api/account/account";
+import { getMessage, sendMessage, getSender } from "api/chat/chat";
 export default {
   components: { chatRemain, chatBox },
   data() {
     return {
       modal: false,
-      userInfos: [{ username: "ZEO", id: "1" }],
-      currentChat: { username: "" },
+      currentChat: { username: "", id: "" },
       message: "",
-      chats: []
+      chats: [],
+      userInfos: []
     };
   },
+  async mounted() {
+    await this.getMessageSender();
+    await this.receiveMessage();
+  },
   methods: {
-    handleChat(userInfo) {
-      this.currentChat = userInfo;
+    async handleChat(item) {
+      this.currentChat = item;
+      await this.receiveMessage();
     },
     select: function(chatbox) {
-      if (chatbox.type == 0) {
+      if (chatbox.fromId !== this.currentChat.id) {
         return {
           onleft: false,
           onright: true
@@ -68,7 +75,42 @@ export default {
           onright: false
         };
       }
+    },
+    async getMessageSender() {
+      const res = await getSender(this.$store.state.account.id);
+      this.userInfos = res.data.data;
+      console.log(res);
+    },
+    async sendMessage() {
+      if (this.message !== "") {
+        this.$socket.emit("sendmessage", this.currentChat.id);
+        await sendMessage(
+          this.$store.state.account.id,
+          this.currentChat.id,
+          this.message
+        );
+        await this.receiveMessage();
+      } else {
+        this.$message({
+          type: "warning",
+          message: "输入为空哦"
+        });
+      }
+    },
+    async receiveMessage() {
+      const res = await getMessage(
+        this.currentChat.id,
+        this.$store.state.account.id
+      );
+      this.chats = res.data.data;
+      this.$nextTick(() => {
+        let msg = document.getElementById("msg");
+        msg.scrollTop = msg.scrollHeight;
+      });
     }
+  },
+  sockets: {
+    receivemessage: async function() {}
   }
 };
 </script>
@@ -81,13 +123,13 @@ export default {
 }
 
 .cleft {
-  flex-basis: 25%;
-  background-color: white;
-  overflow: hidden;
+  flex-basis: 20%;
+  background-color: rgb(253, 253, 253);
+  overflow: scroll;
 }
 
 .cright {
-  flex-basis: 75%;
+  flex-basis: 80%;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -103,7 +145,7 @@ export default {
 
 .chatarea {
   flex: 1;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .foot {
@@ -122,7 +164,7 @@ export default {
 .onleft {
   position: relative;
   left: 0%;
-  background: #fff;
+  background: rgb(171, 155, 216);
 }
 
 .onright {
