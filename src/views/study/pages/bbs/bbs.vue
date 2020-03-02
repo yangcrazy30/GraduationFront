@@ -2,18 +2,11 @@
   <div class="secondarea">
     <div class="button">
       <el-input v-model="saerchkeyword" placeholder="请输入帖子名"></el-input>
-      <el-button type="primary" @click>Search</el-button>
-      <el-button style="float:right" type="primary" @click="dialogshow = true"
-        >new</el-button
-      >
+      <el-button type="primary" @click="searchPost">Search</el-button>
+      <el-button style="float:right" type="primary" @click="dialogshow = true">new</el-button>
     </div>
     <ul>
-      <li
-        class="post"
-        v-for="item in posts"
-        :key="item.id"
-        :data-index="item.id"
-      >
+      <li class="post" v-for="item in posts" :key="item.id" :data-index="item.id">
         <BbsItem :data="item"></BbsItem>
       </li>
     </ul>
@@ -31,11 +24,7 @@
           <el-input v-model="form.title" placeholder></el-input>
         </el-form-item>
         <el-form-item label="Content">
-          <el-input
-            type="textarea"
-            v-model="form.content"
-            placeholder="Content"
-          ></el-input>
+          <el-input type="textarea" v-model="form.content" placeholder="Content"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer">
@@ -48,7 +37,7 @@
 
 <script>
 import BbsItem from "components/bbsitem";
-import { getPost, newPost, getPostCount } from "api/bbs/post";
+import { newPost, getPostCount, getSearchPost } from "api/bbs/post";
 export default {
   components: {
     BbsItem
@@ -70,10 +59,13 @@ export default {
   },
   methods: {
     async handleCurrentChange(current) {
-      const res = await getPost({
-        page: this.currentPage,
-        size: this.pageSize
-      });
+      const res = await getSearchPost(
+        {
+          page: this.currentPage,
+          size: this.pageSize
+        },
+        this.saerchkeyword
+      );
       this.posts = res.data.data;
     },
     async handlePost() {
@@ -83,16 +75,32 @@ export default {
       });
       if (res.data.success) {
         this.dialogshow = false;
-        const newpost = await getPost({
-          page: 1,
-          size: this.pageSize
-        });
+        const newpost = await getSearchPost(
+          {
+            page: 1,
+            size: this.pageSize
+          },
+          ""
+        );
+        await this.getPostCount();
         this.posts = newpost.data.data;
       }
     },
     async getPostCount() {
       const res = await getPostCount();
       this.total = res.data.data;
+    },
+    async searchPost() {
+      const res = await getSearchPost(
+        {
+          page: this.currentPage,
+          size: this.pageSize
+        },
+        this.saerchkeyword
+      );
+      if (res.data.success) {
+        this.posts = res.data.data;
+      }
     }
   }
 };

@@ -4,12 +4,7 @@
     <div class="box">
       <div class="left">
         <div class="search">
-          <el-input
-            placeholder="Please Input"
-            prefix-icon="el-icon-search"
-            v-model="input"
-          >
-          </el-input>
+          <el-input placeholder="Please Input" prefix-icon="el-icon-search" v-model="input"></el-input>
         </div>
         <div class="filter">
           <SlideBar :keywords="keywords"></SlideBar>
@@ -27,8 +22,7 @@
             :current-page.sync="currentPage"
             @current-change="handleCurrentChange"
             :total="total"
-          >
-          </el-pagination>
+          ></el-pagination>
         </div>
       </div>
     </div>

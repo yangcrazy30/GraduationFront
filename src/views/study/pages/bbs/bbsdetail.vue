@@ -10,7 +10,7 @@
       <el-button
         style="float:right;margin:0.5rem"
         type="primary"
-        @click="handleReply(post.username)"
+        @click="handleReply(post.userId)"
       >Reply</el-button>
     </div>
     <div class="reply">
@@ -18,7 +18,7 @@
         v-for="item in replys"
         :key="item.id"
         :data="item"
-        v-on:click.native="handleReply(item.to)"
+        v-on:click.native="handleReply(item.fromId)"
       ></ReplyItem>
     </div>
     <el-pagination
@@ -59,6 +59,7 @@ export default {
         title: "",
         content: ""
       },
+      currentReply: "",
       form: {
         content: ""
       },
@@ -74,12 +75,12 @@ export default {
     await this.updateReply({ page: 1, size: this.pageSize });
   },
   methods: {
-    handleReply(to) {
+    handleReply(from) {
+      this.currentReply = from;
       this.replyDialog = true;
     },
     async getPostInfo() {
       const res = await getPostById(this.$route.params.postid);
-      console.log(res);
       this.post = res.data.data;
     },
     async handleCurrentChange() {
@@ -90,7 +91,6 @@ export default {
     },
     async updateReply(config) {
       const res = await getReply(config, this.post.id);
-      console.log(res);
       this.replys = res.data.data;
     },
     async updateCount() {
@@ -100,10 +100,12 @@ export default {
     async sendReply() {
       const res = await replyPost({
         postId: this.post.id,
-        toId: this.post.userId,
+        toId: this.currentReply,
         content: this.form.content
       });
       await this.updateReply({ page: 1, size: this.pageSize });
+      await this.updateCount();
+      this.form.content = "";
       this.replyDialog = false;
     }
   }

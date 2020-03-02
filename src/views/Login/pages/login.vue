@@ -38,7 +38,6 @@ export default {
           this.$router.push({ path: "/profile" });
         })
         .catch(error => {
-          console.log(error);
           this.$message({
             message: error,
             type: "error"

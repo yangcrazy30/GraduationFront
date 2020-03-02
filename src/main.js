@@ -9,7 +9,7 @@ import "element-ui/lib/theme-chalk/index.css";
 import VueSocketIO from 'vue-socket.io'
 
 Vue.use(new VueSocketIO({
-  debug: true,
+  debug: false,
   connection: 'http://127.0.0.1:3000',
 }))
 

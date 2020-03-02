@@ -46,7 +46,7 @@ const actions = {
     await updateUserInfo(userinfo);
     const newuserinfo = await getInfo();
     localStorage.setItem("ujs", newuserinfo.data.data.token);
-    commit("login", newuserinfo);
+    commit("login", newuserinfo.data.data);
   }
 };
 

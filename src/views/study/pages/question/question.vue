@@ -2,7 +2,7 @@
   <div class="box">
     <div style="width:60%;display:flex;justify-content:center">
       <div class="cleft">
-        <chatRemain :userInfo="currentChat"></chatRemain>
+        <chatRemain :userInfo="currentChat" v-on:click.native="handleChat()"></chatRemain>
       </div>
       <div class="cright">
         <div class="chathead">
@@ -19,11 +19,7 @@
         </div>
         <div class="foot">
           <div class="inputitem" style="flex-basis:75%">
-            <el-input
-              v-model="message"
-              placeholder="Please Input"
-              type="textarea"
-            ></el-input>
+            <el-input v-model="message" placeholder="Please Input" type="textarea"></el-input>
           </div>
           <div class="inputitem" style="flex-basis:25%">
             <el-button type="primary" @click="sendMessage">Send</el-button>
@@ -52,7 +48,6 @@ export default {
   },
   async mounted() {
     await this.getTeacherInfo();
-    await this.receiveMessage();
     this.$socket.emit("join", this.$store.state.account.id);
   },
   destroyed() {
@@ -64,6 +59,9 @@ export default {
       let courseinfo = res.data.data;
       const teacher = await getUserinfo(courseinfo.teacher);
       this.currentChat = teacher.data.data;
+    },
+    async handleChat() {
+      await this.receiveMessage();
     },
     select: function(chatbox) {
       if (chatbox.fromId !== this.currentChat.id) {
@@ -107,7 +105,9 @@ export default {
     }
   },
   sockets: {
-    receivemessage: async function() {}
+    receivemessage: async function() {
+      await this.receiveMessage();
+    }
   }
 };
 </script>

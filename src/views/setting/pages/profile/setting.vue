@@ -4,33 +4,21 @@
       <el-tab-pane label="基本资料" name="first">
         <el-form :model="basicform" ref="basic" label-width="80px">
           <el-form-item label="Edit">
-            <el-button type="primary" @click="disabled = !disabled"
-              >Edit</el-button
-            >
+            <el-button type="primary" @click="disabled = !disabled">Edit</el-button>
           </el-form-item>
           <el-form-item label="UserName">
-            <el-input
-              v-model="basicform.username"
-              :disabled="disabled"
-            ></el-input>
+            <el-input v-model="basicform.username" :disabled="disabled"></el-input>
           </el-form-item>
           <el-form-item label="Email">
             <el-input v-model="basicform.email" :disabled="disabled"></el-input>
           </el-form-item>
           <el-form-item v-show="!disabled">
-            <el-button type="primary" @click="updateForm('basic')"
-              >Update</el-button
-            >
+            <el-button type="primary" @click="updateForm('basic')">Update</el-button>
           </el-form-item>
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="密码管理" name="second">
-        <el-form
-          :model="passwordform"
-          :rules="passwordrules"
-          ref="passform"
-          label-width="200px"
-        >
+        <el-form :model="passwordform" :rules="passwordrules" ref="passform" label-width="200px">
           <el-form-item label="Old Password" prop="oldpass">
             <el-input v-model="passwordform.oldpass" type="password"></el-input>
           </el-form-item>
@@ -38,15 +26,10 @@
             <el-input v-model="passwordform.pass" type="password"></el-input>
           </el-form-item>
           <el-form-item label="Confirm New Password" prop="checkpass">
-            <el-input
-              v-model="passwordform.checkpass"
-              type="password"
-            ></el-input>
+            <el-input v-model="passwordform.checkpass" type="password"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="updateForm('passform')"
-              >Update</el-button
-            >
+            <el-button type="primary" @click="updateForm('passform')">Update</el-button>
           </el-form-item>
         </el-form>
       </el-tab-pane>
@@ -124,7 +107,8 @@ export default {
             formName === "basic"
               ? this.basicform
               : { password: this.passform.pass };
-          this.$store.dispatch("changeUserInfo");
+          this.$store.dispatch("changeUserInfo", userinfo);
+          this.disabled = true;
         }
       });
     },

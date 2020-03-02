@@ -4,18 +4,13 @@
       <template v-for="file in fileList">
         <FileItem :file="file" :key="file.id" v-if="!file.children">
           <div>
-            <Icon :iconClass="file.type"> {{ file.name }}</Icon>
+            <Icon :iconClass="file.type">{{ file.name }}</Icon>
           </div>
         </FileItem>
         <ReSubItem v-else :key="file.id" :data="file"></ReSubItem>
       </template>
     </FileManage>
-    <el-dialog
-      title="上传文件"
-      :visible.sync="uploadDialog"
-      width="80%"
-      @open="doFilter"
-    >
+    <el-dialog title="上传文件" :visible.sync="uploadDialog" width="80%" @open="doFilter">
       <div>
         <div style="padding:0.5rem;">
           <p>
@@ -28,8 +23,7 @@
             :filter-node-method="filterNode"
             @node-click="handleNodeClick"
             ref="tree"
-          >
-          </el-tree>
+          ></el-tree>
         </div>
         <div style="padding:0.5rem;">
           <el-upload
@@ -48,17 +42,11 @@
               size="small"
               type="primary"
               @click.stop="openFolderDialog"
-              >新建文件夹</el-button
-            >
+            >新建文件夹</el-button>
           </el-upload>
         </div>
         <div>
-          <el-dialog
-            title="新建文件夹"
-            :visible.sync="folderDiaglog"
-            width="80%"
-            append-to-body
-          >
+          <el-dialog title="新建文件夹" :visible.sync="folderDiaglog" width="80%" append-to-body>
             <el-form :model="form" ref="form">
               <el-form-item label="文件夹名">
                 <el-input v-model="form.folderName"></el-input>
@@ -126,9 +114,6 @@ export default {
     upload() {
       this.uploadDialog = true;
     },
-    download(file) {
-      console.log(file);
-    },
     async confirmupload() {
       await uploadResource(
         this.currentFile,
@@ -136,6 +121,8 @@ export default {
         this.currentPath
       );
       await this.getResource();
+      this.uploadFiles = [];
+      this.currentFile = null;
       this.uploadDialog = false;
     },
     doFilter() {

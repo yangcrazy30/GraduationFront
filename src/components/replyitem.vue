@@ -1,8 +1,8 @@
 <template>
   <div class="bbsitem">
     <div class="item">
-      <span>{{ data.fromId }}</span> To
-      <span>{{ data.toId }}</span>
+      <span>{{ data.fromUsername }}</span> To
+      <span>{{ data.toUsername }}</span>
     </div>
     <div class="item">
       <span>{{ data.content }}</span>
@@ -11,7 +11,7 @@
       <i
         class="iconfont icon-diancai1-copy-copy"
         :style="{ color: like ? 'red' : 'gray' }"
-        @click="handleLike"
+        @click.stop="handleLike"
       ></i>
       <span v-show="data.like !== 0">{{ data.like }}</span>
       <span>{{ data.time }}</span>

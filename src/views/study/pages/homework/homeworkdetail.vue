@@ -27,7 +27,7 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="finishHomework">提交</el-button>
+          <el-button :disabled="disable" type="primary" @click="finishHomework">提交</el-button>
         </el-form-item>
       </el-form>
     </main>

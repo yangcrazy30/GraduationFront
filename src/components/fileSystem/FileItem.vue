@@ -20,8 +20,6 @@ export default {
         this.$route.params.id +
         "/" +
         this.file.path;
-      console.log("handle download");
-      console.log(path);
       window.open(path);
     }
   }

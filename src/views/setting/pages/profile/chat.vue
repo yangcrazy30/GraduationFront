@@ -23,11 +23,7 @@
       </div>
       <div class="foot">
         <div class="inputitem" style="flex-basis:75%">
-          <el-input
-            v-model="message"
-            placeholder="Please Input"
-            type="textarea"
-          ></el-input>
+          <el-input v-model="message" placeholder="Please Input" type="textarea"></el-input>
         </div>
         <div class="inputitem" style="flex-basis:25%">
           <el-button type="primary" @click="sendMessage">Send</el-button>
@@ -79,7 +75,6 @@ export default {
     async getMessageSender() {
       const res = await getSender(this.$store.state.account.id);
       this.userInfos = res.data.data;
-      console.log(res);
     },
     async sendMessage() {
       if (this.message !== "") {

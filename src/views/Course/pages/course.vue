@@ -4,15 +4,14 @@
       <h1>{{ course.name }}</h1>
       <el-button type="primary" @click="jumpToStudy">
         <span v-if="!isSubscribe">Subscribe</span>
-        <span v-else>Learn</span>
+        <div v-else>
+          <span>Learn</span>
+        </div>
       </el-button>
     </header>
     <div class="box">
       <div class="left">
-        <div
-          class="courseImg"
-          :style="{ backgroundImage: 'url(' + course.imageUrl + ')' }"
-        ></div>
+        <div class="courseImg" :style="{ backgroundImage: 'url(' + course.imageUrl + ')' }"></div>
         <h2>Description</h2>
         <div>
           <span style="font-size: 20px">{{ course.description }}</span>

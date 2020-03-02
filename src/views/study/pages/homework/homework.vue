@@ -3,25 +3,15 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="我的作业" name="first" v-if="!isCourseTeacher">
         <div class="homeworks">
-          <div
-            style="width:25%;padding:0.5rem;"
-            v-for="homework in homeworks"
-            :key="homework.id"
-          >
-            <HomeworkItem
-              :homework="homework"
-              @dowork="doHomework"
-            ></HomeworkItem>
+          <div style="width:25%;padding:0.5rem;" v-for="homework in homeworks" :key="homework.id">
+            <HomeworkItem :homework="homework" @dowork="doHomework"></HomeworkItem>
           </div>
         </div>
       </el-tab-pane>
       <el-tab-pane label="发布作业" name="second" v-if="isCourseTeacher">
         <el-form :model="homeworkForm" ref="homeworkForm" label-width="80px">
           <el-form-item label="作业名称">
-            <el-input
-              v-model="homeworkForm.name"
-              placeholder="作业名称"
-            ></el-input>
+            <el-input v-model="homeworkForm.name" placeholder="作业名称"></el-input>
           </el-form-item>
           <el-form-item label="作业时间">
             <el-date-picker
@@ -30,22 +20,15 @@
               range-separator="至"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
-            >
-            </el-date-picker>
+            ></el-date-picker>
           </el-form-item>
           <el-form-item
             v-for="(question, index) in homeworkForm.questions"
             :label="'问题' + (index + 1)"
             :key="question.id"
           >
-            <el-input
-              v-model="question.value"
-              placeholder="问题描述"
-            ></el-input>
-            <el-input
-              v-model="question.options"
-              placeholder="选项（4个选项之间使用‘/’分隔，如'A/B/C/D'）"
-            ></el-input>
+            <el-input v-model="question.value" placeholder="问题描述"></el-input>
+            <el-input v-model="question.options" placeholder="选项（4个选项之间使用‘/’分隔，如'A/B/C/D'）"></el-input>
             <div>
               <el-select v-model="question.answer" placeholder="正确答案">
                 <el-option
@@ -53,12 +36,9 @@
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
-                >
-                </el-option>
+                ></el-option>
               </el-select>
-              <el-button @click.prevent="removeQuestion(question)"
-                >删除</el-button
-              >
+              <el-button @click.prevent="removeQuestion(question)">删除</el-button>
             </div>
           </el-form-item>
           <el-form-item>
@@ -132,7 +112,6 @@ export default {
       }
     },
     doHomework(id) {
-      console.log(id);
       this.$router.push({
         name: "homeworkdetail",
         params: { homeworkid: id }
