@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="我的课程" name="first">
+      <el-tab-pane label="我学的课" name="first">
         <div class="course">
           <div style="width:30%;" v-for="course in courses" :key="course.id">
             <courseItem :course="course"></courseItem>
@@ -10,11 +10,7 @@
       </el-tab-pane>
       <el-tab-pane label="我教的课" name="second" v-if="role === 'teacher'">
         <div class="course">
-          <div
-            style="width:30%;"
-            v-for="course in teachCourse"
-            :key="course.id"
-          >
+          <div style="width:30%;" v-for="course in teachCourse" :key="course.id">
             <courseItem :course="course"></courseItem>
           </div>
           <div class="newcourse" @click="addCourse">
@@ -29,22 +25,14 @@
           <el-input v-model="courseform.name" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="课程日期">
-          <el-date-picker
-            type="date"
-            placeholder="开始时间"
-            v-model="courseform.startDay"
-          ></el-date-picker>
-          -
-          <el-date-picker
-            placeholder="结束时间"
-            v-model="courseform.endDay"
-          ></el-date-picker>
+          <el-date-picker type="date" placeholder="开始时间" v-model="courseform.startDay"></el-date-picker>-
+          <el-date-picker placeholder="结束时间" v-model="courseform.endDay"></el-date-picker>
         </el-form-item>
         <el-form-item label="课程描述">
-          <el-input v-model="courseform.description" placeholder=""></el-input>
+          <el-input v-model="courseform.description" placeholder></el-input>
         </el-form-item>
         <el-form-item label="课程图片地址">
-          <el-input v-model="courseform.imageUrl" placeholder=""></el-input>
+          <el-input v-model="courseform.imageUrl" placeholder></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">

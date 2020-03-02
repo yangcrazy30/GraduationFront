@@ -78,7 +78,6 @@ export default {
           return false;
         }
       });
-      console.log(this.form);
     },
     getGrade() {
       let number = 0;
