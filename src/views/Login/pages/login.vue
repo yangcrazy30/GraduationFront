@@ -9,10 +9,7 @@
         <template slot="prepend">Password</template>
       </el-input>
       <div class="btnarea">
-        <el-checkbox
-          v-model="Remember"
-          label="Don't Remember Login"
-        ></el-checkbox>
+        <el-checkbox v-model="Remember" label="Don't Remember Login"></el-checkbox>
         <el-button type="primary" @click="Login">Login</el-button>
       </div>
     </div>
@@ -39,6 +36,13 @@ export default {
         .dispatch("login", { email: this.email, password: this.password })
         .then(() => {
           this.$router.push({ path: "/profile" });
+        })
+        .catch(error => {
+          console.log(error);
+          this.$message({
+            message: error,
+            type: "error"
+          });
         });
     }
   }

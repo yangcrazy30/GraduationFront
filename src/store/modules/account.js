@@ -26,9 +26,14 @@ const actions = {
     if (!email || !password) return;
 
     let response = await login({ email: email, password: password });
-    localStorage.setItem("ujs", response.data.data.token);
-    commit("login", response.data.data);
-    return response;
+    if (response.data.success) {
+      localStorage.setItem("ujs", response.data.data.token);
+      commit("login", response.data.data);
+      return response;
+    } else {
+      throw new Error(response.data.data.err);
+    }
+
   },
   async logout({ commit }) {
     commit("logout");
