@@ -53,6 +53,10 @@ export default {
   async mounted() {
     await this.getTeacherInfo();
     await this.receiveMessage();
+    this.$socket.emit("join", this.$store.state.account.id);
+  },
+  destroyed() {
+    this.$socket.emit("disconnect");
   },
   methods: {
     async getTeacherInfo() {
