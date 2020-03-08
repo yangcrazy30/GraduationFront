@@ -3,10 +3,7 @@
     <div class="settingbox">
       <div class="left">
         <div class="topbar">
-          <div
-            class="avatar"
-            :style="{ backgroundImage: 'url(' + avatarUrl + ')' }"
-          ></div>
+          <div class="avatar" :style="{ backgroundImage: 'url(' + avatarUrl + ')' }"></div>
           <div style="margin:0.5rem">{{ username }}</div>
         </div>
         <el-menu :default-active="activeIndex" @select="handleSelect">

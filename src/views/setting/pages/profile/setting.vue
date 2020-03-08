@@ -114,7 +114,8 @@ export default {
     },
     async upload(file) {
       const res = await uploadAvatar(file);
-      this.imageUrl = res.data.data;
+      console.log(res);
+      this.imageUrl = res.data.data + "?r=" + Math.random();
       await this.$store.dispatch("updateAvatar", {});
     },
     beforeAvatarUpload(file) {
@@ -154,8 +155,7 @@ export default {
   flex-direction: row;
 }
 
-.avatarimg {
-  background-image: url("~@/assets/viewport_background.gif");
+.avatar {
   height: 200px;
   width: 200px;
 }
