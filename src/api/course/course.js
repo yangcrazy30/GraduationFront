@@ -21,7 +21,11 @@ export function getStudentCoursesIds() {
 }
 
 export function updateStudenCourse(id) {
-  return axios.post("/course/studentcourse", { id: id });
+  return axios.post("/course/subs", { id: id });
+}
+
+export function unSubsCourse(courseid, studentid) {
+  return axios.post("/course/unsubs", { courseid: courseid, studentid: studentid });
 }
 
 export function getSubsCourse() {
@@ -34,4 +38,21 @@ export function getCourse(config) {
       config: config
     }
   });
+}
+
+export function getCourseStudents(config, courseId) {
+  return axios.get("/course/students", {
+    params: {
+      config: config,
+      courseId: courseId
+    }
+  });
+}
+
+export function updateFinalGrade(courseid, studentid, grade) {
+  return axios.post("/course/finalgrade", {
+    courseid: courseid,
+    studentid: studentid,
+    grade: grade
+  })
 }

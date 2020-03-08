@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="我学的课" name="first">
+      <el-tab-pane label="我学的课" name="first" v-if="role === 'student'">
         <div class="course">
           <div style="width:30%;" v-for="course in courses" :key="course.id">
             <courseItem :course="course"></courseItem>
@@ -52,7 +52,7 @@ export default {
   },
   data() {
     return {
-      activeName: "first",
+      activeName: "",
       courses: [],
       teachCourse: [],
       dialogFormVisible: false,
@@ -73,6 +73,7 @@ export default {
   async mounted() {
     await this.getTeacherCourse();
     await this.getSubCourse();
+    this.checkRole();
   },
   methods: {
     handleClick(tab, event) {
@@ -96,6 +97,9 @@ export default {
     async getSubCourse() {
       const res = await getSubsCourse();
       this.courses = res.data.data.courses;
+    },
+    checkRole() {
+      this.activeName = this.role === "student" ? "first" : "second";
     }
   }
 };

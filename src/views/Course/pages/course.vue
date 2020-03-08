@@ -46,7 +46,8 @@
 import {
   getCourseById,
   getStudentCoursesIds,
-  updateStudenCourse
+  updateStudenCourse,
+  unSubsCourse
 } from "api/course/course";
 import { tranformDate } from "@/utils/utils";
 export default {
@@ -75,9 +76,6 @@ export default {
       await this.setStudentSubs();
       this.$router.push({ name: "study", params: { id: this.course.id } });
     },
-    async subCourse() {
-      console.log("sub course");
-    },
     async getStudentSubs() {
       const res = await getStudentCoursesIds();
       this.isSubscribe = res.data.data.courseIds.includes(
@@ -87,12 +85,21 @@ export default {
     async setStudentSubs() {
       await updateStudenCourse(this.$route.params.id);
     },
-    handleUnSubs() {}
+    async handleUnSubs() {
+      await unSubsCourse(this.course.id);
+      await this.getStudentSubs();
+    },
+    checkIsTeacher() {
+      if (this.$store.state.account.role === "teacher") {
+        this.$router.push({ name: "study", params: { id: this.course.id } });
+      }
+    }
   },
   created() {},
   async mounted() {
     await this.getStudentSubs();
     await this.getCourseInfo();
+    this.checkIsTeacher();
   }
 };
 </script>

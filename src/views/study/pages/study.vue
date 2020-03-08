@@ -1,15 +1,12 @@
 <template>
   <div class="mainarea">
     <header>
-      <el-menu
-        :default-active="activeIndex"
-        mode="horizontal"
-        @select="handleSelect"
-      >
+      <el-menu :default-active="activeIndex" mode="horizontal" @select="handleSelect">
         <el-menu-item index="bbs">BBS</el-menu-item>
         <el-menu-item index="resource">Resource</el-menu-item>
         <el-menu-item index="homework">Homework</el-menu-item>
         <el-menu-item index="question" v-if="isStudent">Question</el-menu-item>
+        <el-menu-item index="management" v-if="!isStudent">Management</el-menu-item>
       </el-menu>
     </header>
     <div>

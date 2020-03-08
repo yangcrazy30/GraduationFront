@@ -6,6 +6,7 @@ import Main from "views/study/pages/main";
 import BbsDetail from "views/study/pages/bbs/bbsdetail";
 import HomeworkDetail from "views/study/pages/homework/homeworkdetail"
 import Question from "views/study/pages/question/question";
+import Management from "views/study/pages/management/management";
 export default {
   path: "/study/:id",
   component: Study,
@@ -44,6 +45,11 @@ export default {
       name: "resource",
       path: "resource",
       component: Resource
+    },
+    {
+      name: 'management',
+      path: 'management',
+      component: Management
     }
   ]
 };

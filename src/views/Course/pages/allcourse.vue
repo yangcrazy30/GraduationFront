@@ -53,6 +53,7 @@ export default {
   },
   async mounted() {
     await this.handleCurrentChange();
+    this.checkIsTeacher();
   },
   methods: {
     async handleCurrentChange(current) {
@@ -61,6 +62,11 @@ export default {
         size: this.pageSize
       });
       this.courses = res.data.data;
+    },
+    checkIsTeacher() {
+      if (this.$store.state.account.role === "teacher") {
+        this.$router.push({ name: "mycourse" });
+      }
     }
   }
 };
