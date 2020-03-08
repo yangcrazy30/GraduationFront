@@ -2,12 +2,17 @@
   <div class="mainarea">
     <header class="ct">
       <h1>{{ course.name }}</h1>
-      <el-button type="primary" @click="jumpToStudy">
-        <span v-if="!isSubscribe">Subscribe</span>
-        <div v-else>
-          <span>Learn</span>
-        </div>
-      </el-button>
+      <div>
+        <el-button type="primary" @click="handleUnSubs" v-if="isSubscribe">
+          <span>UnSubscribe</span>
+        </el-button>
+        <el-button type="primary" @click="jumpToStudy">
+          <span v-if="!isSubscribe">Subscribe</span>
+          <div v-else>
+            <span>Learn</span>
+          </div>
+        </el-button>
+      </div>
     </header>
     <div class="box">
       <div class="left">
@@ -81,7 +86,8 @@ export default {
     },
     async setStudentSubs() {
       await updateStudenCourse(this.$route.params.id);
-    }
+    },
+    handleUnSubs() {}
   },
   created() {},
   async mounted() {

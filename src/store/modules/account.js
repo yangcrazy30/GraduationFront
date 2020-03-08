@@ -40,7 +40,7 @@ const actions = {
   },
   async updateAvatar({ commit }) {
     const userinfo = await getInfo();
-    commit("login", userinfo);
+    commit("login", userinfo.data.data);
   },
   async changeUserInfo({ commit }, userinfo) {
     await updateUserInfo(userinfo);
@@ -55,7 +55,7 @@ const mutations = {
     state.email = payload.email;
     state.username = payload.username;
     state.role = payload.role;
-    state.avatar = payload.avatar;
+    state.avatar = payload.avatar + "?r=" + Math.random();
     state.id = payload.id;
   },
   logout(state) {
