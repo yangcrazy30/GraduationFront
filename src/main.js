@@ -11,7 +11,7 @@ import ZeoUi from "ziyao-ui";
 
 Vue.use(new VueSocketIO({
   debug: false,
-  connection: 'http://127.0.0.1:3000',
+  connection: 'http://101.200.209.120:3000',
 }))
 
 Vue.use(ElementUI);
