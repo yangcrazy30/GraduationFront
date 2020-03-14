@@ -10,7 +10,12 @@
         <ReSubItem v-else :key="file.id" :data="file"></ReSubItem>
       </template>
     </FileManage>
-    <el-dialog title="上传文件" :visible.sync="uploadDialog" width="80%" @open="doFilter">
+    <el-dialog
+      title="上传文件"
+      :visible.sync="uploadDialog"
+      width="80%"
+      @open="doFilter"
+    >
       <div>
         <div style="padding:0.5rem;">
           <p>
@@ -42,11 +47,17 @@
               size="small"
               type="primary"
               @click.stop="openFolderDialog"
-            >新建文件夹</el-button>
+              >新建文件夹</el-button
+            >
           </el-upload>
         </div>
         <div>
-          <el-dialog title="新建文件夹" :visible.sync="folderDiaglog" width="80%" append-to-body>
+          <el-dialog
+            title="新建文件夹"
+            :visible.sync="folderDiaglog"
+            width="80%"
+            append-to-body
+          >
             <el-form :model="form" ref="form">
               <el-form-item label="文件夹名">
                 <el-input v-model="form.folderName"></el-input>
@@ -71,7 +82,7 @@
 import FileManage from "components/fileSystem/FileManage";
 import FileItem from "components/fileSystem/FileItem";
 import ReSubItem from "components/fileSystem/ReSubItem";
-import Icon from "components/iconfont";
+// import Icon from "components/iconfont";
 import {
   getResourceTree,
   addNewFolder,
@@ -83,8 +94,8 @@ export default {
   components: {
     FileManage,
     FileItem,
-    ReSubItem,
-    Icon
+    ReSubItem
+    // Icon
   },
   data() {
     return {

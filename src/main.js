@@ -7,6 +7,7 @@ import store from "./store/index";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import VueSocketIO from 'vue-socket.io'
+import ZeoUi from "ziyao-ui";
 
 Vue.use(new VueSocketIO({
   debug: false,
@@ -14,6 +15,7 @@ Vue.use(new VueSocketIO({
 }))
 
 Vue.use(ElementUI);
+Vue.use(ZeoUi);
 Vue.config.productionTip = false;
 
 router.afterEach((to, from) => {
