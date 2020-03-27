@@ -1,12 +1,10 @@
-import Signup from "views/Login/pages/signup";
-import Login from "views/Login/pages/login";
 export default [
   {
     path: "/login",
-    component: Login
+    component: () => import('views/Login/pages/login')
   },
   {
     path: "/signup",
-    component: Signup
+    component: () => import('views/Login/pages/signup')
   }
 ];

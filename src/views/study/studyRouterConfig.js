@@ -1,55 +1,46 @@
-import Study from "views/study/pages/study";
-import HomeWork from "views/study/pages/homework/homework";
-import BBS from "views/study/pages/bbs/bbs";
-import Resource from "views/study/pages/resource/resource";
-import Main from "views/study/pages/main";
-import BbsDetail from "views/study/pages/bbs/bbsdetail";
-import HomeworkDetail from "views/study/pages/homework/homeworkdetail"
-import Question from "views/study/pages/question/question";
-import Management from "views/study/pages/management/management";
 export default {
   path: "/study/:id",
-  component: Study,
+  component: () => import('views/study/pages/study'),
   children: [
     {
       name: "study",
       path: "/",
-      component: Main
+      component: () => import('views/study/pages/main')
     },
     {
       name: 'question',
       path: "question",
-      component: Question
+      component: () => import('views/study/pages/question/question')
     },
     {
       name: "homework",
       path: "homework",
-      component: HomeWork
+      component: () => import('views/study/pages/homework/homework')
     },
     {
       name: "bbs",
       path: "bbs",
-      component: BBS
+      component: () => import('views/study/pages/bbs/bbs')
     },
     {
       path: "bbs/detail/:postid",
       name: "bbsdetail",
-      component: BbsDetail
+      component: () => import('views/study/pages/bbs/bbsdetail')
     },
     {
       path: "homework/detail/:homeworkid",
       name: "homeworkdetail",
-      component: HomeworkDetail
+      component: () => import('views/study/pages/homework/homeworkdetail')
     },
     {
       name: "resource",
       path: "resource",
-      component: Resource
+      component: () => import('views/study/pages/resource/resource')
     },
     {
       name: 'management',
       path: 'management',
-      component: Management
+      component: () => import('views/study/pages/management/management')
     }
   ]
 };

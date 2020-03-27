@@ -1,25 +1,21 @@
-import Profile from "views/setting/pages/index";
-import Chat from "views/setting/pages/profile/chat";
-import CCourse from "views/setting/pages/profile/course";
-import Setting from "views/setting/pages/profile/setting";
 export default {
     path: "/profile",
-    component: Profile,
+    component: () => import('views/setting/pages/index'),
     children: [
         {
             name: "setting",
             path: "setting",
-            component: Setting
+            component: () => import('views/setting/pages/profile/setting')
         },
         {
             name: "mycourse",
             path: "course",
-            component: CCourse
+            component: () => import('views/setting/pages/profile/course')
         },
         {
             name: "chat",
             path: "chat",
-            component: Chat
+            component: () => import('views/setting/pages/profile/chat')
         }
     ]
 };
