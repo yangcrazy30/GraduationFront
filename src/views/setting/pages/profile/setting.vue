@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { baseUrl } from "@/utils/config";
+import config from "@/utils/config";
 import { uploadAvatar } from "api/upload/upload";
 export default {
   data() {
@@ -84,7 +84,7 @@ export default {
       },
       activeName: "first",
       imageUrl: "",
-      baseUrl: baseUrl,
+      baseUrl: config.baseURL,
       passwordrules: {
         oldpass: [{ validator: validatePass, trigger: "blur" }],
         pass: [{ validator: validatePass, trigger: "blur" }],

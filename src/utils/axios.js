@@ -1,6 +1,7 @@
 import axios from "axios";
 import qs from "qs";
-axios.defaults.baseURL = "http://101.200.209.120:3000";
+import config from './config';
+axios.defaults.baseURL = config.baseURL;
 axios.defaults.withCredentials = true;
 
 axios.interceptors.request.use(function (config) {
