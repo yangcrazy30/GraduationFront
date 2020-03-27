@@ -105,7 +105,9 @@ export default {
     }
   },
   sockets: {
-    receivemessage: async function() {}
+    receivemessage: async function() {
+      await this.receiveMessage();
+    }
   }
 };
 </script>
