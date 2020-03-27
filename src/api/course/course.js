@@ -32,10 +32,11 @@ export function getSubsCourse() {
   return axios.get("/course/subscourse");
 }
 
-export function getCourse(config) {
+export function getCourse(config, courseName) {
   return axios.get("/course/courses", {
     params: {
-      config: config
+      config: config,
+      courseName: courseName
     }
   });
 }

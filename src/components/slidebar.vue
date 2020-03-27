@@ -1,21 +1,9 @@
 <template>
   <div>
-    <div
-      class="top"
-      v-for="(item, index) in kwords"
-      :key="index"
-      @click="show(index)"
-    >
-      <div
-        class="stitle"
-        :style="{ 'background-color': item.open ? '#2e2d29' : '#77766c' }"
-      >
+    <div class="top" v-for="(item, index) in kwords" :key="index" @click="show(index)">
+      <div class="stitle" :style="{ 'background-color': item.open ? '#2e2d29' : '#77766c' }">
         <span>{{ item.title }}</span>
-        <i
-          v-if="!item.open"
-          class="iconfont icon-plus"
-          style="font-size: 20px"
-        ></i>
+        <i v-if="!item.open" class="iconfont icon-plus" style="font-size: 20px"></i>
         <i v-else class="iconfont icon--hao"></i>
       </div>
       <div v-show="item.open">
@@ -25,8 +13,7 @@
           lazy
           show-checkbox
           @check-change="handleCheckChange"
-        >
-        </el-tree>
+        ></el-tree>
       </div>
     </div>
   </div>
@@ -65,36 +52,8 @@ export default {
     },
     loadNode(node, resolve) {
       if (node.level === 0) {
-        return resolve([{ name: "region1" }, { name: "region2" }]);
+        return resolve([{ name: "Math" }, { name: "English" }]);
       }
-      if (node.level > 3) return resolve([]);
-
-      var hasChild;
-      if (node.data.name === "region1") {
-        hasChild = true;
-      } else if (node.data.name === "region2") {
-        hasChild = false;
-      } else {
-        hasChild = Math.random() > 0.5;
-      }
-
-      setTimeout(() => {
-        var data;
-        if (hasChild) {
-          data = [
-            {
-              name: "zone" + this.count++
-            },
-            {
-              name: "zone" + this.count++
-            }
-          ];
-        } else {
-          data = [];
-        }
-
-        resolve(data);
-      }, 500);
     }
   }
 };

@@ -4,7 +4,12 @@
     <div class="box">
       <div class="left">
         <div class="search">
-          <el-input placeholder="Please Input" prefix-icon="el-icon-search" v-model="input"></el-input>
+          <el-input
+            placeholder="Please Input CourseName"
+            prefix-icon="el-icon-search"
+            @change="searchCourse"
+            v-model="input"
+          ></el-input>
         </div>
         <div class="filter">
           <SlideBar :keywords="keywords"></SlideBar>
@@ -56,12 +61,18 @@ export default {
     this.checkIsTeacher();
   },
   methods: {
-    async handleCurrentChange(current) {
-      const res = await getCourse({
-        page: this.currentPage,
-        size: this.pageSize
-      });
+    async handleCurrentChange() {
+      const res = await getCourse(
+        {
+          page: this.currentPage,
+          size: this.pageSize
+        },
+        this.input
+      );
       this.courses = res.data.data;
+    },
+    async searchCourse() {
+      await this.handleCurrentChange();
     },
     checkIsTeacher() {
       if (this.$store.state.account.role === "teacher") {
