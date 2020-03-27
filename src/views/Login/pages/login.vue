@@ -5,7 +5,7 @@
       <el-input placeholder="请输入内容" v-model="email">
         <template slot="prepend">Email</template>
       </el-input>
-      <el-input placeholder="请输入内容" v-model="password" type="password">
+      <el-input placeholder="请输入内容" v-model="password" show-password>
         <template slot="prepend">Password</template>
       </el-input>
       <div class="btnarea">
