@@ -1,6 +1,9 @@
 <template>
-  <div class="layout">
+  <div class="layout" id="layout">
     <div class="homeImg"></div>
+    <div class="droparrow" @click="dropToBottom(50)">
+      <Icon class="droparrow" iconClass="zhixiangjiantou-copy"></Icon>
+    </div>
     <header>
       <div class="ctitle">
         <strong>Fetured Course</strong>
@@ -37,6 +40,18 @@ export default {
     },
     JumpTOALLCourse() {
       this.$router.push({ path: "/allcourse" });
+    },
+    dropToBottom(i) {
+      let clientHeight =
+        document.documentElement.clientHeight || document.body.clientHeight;
+      let scrollHeight = document.documentElement.scrollHeight;
+      let height = scrollHeight - clientHeight; //超出窗口上界的值就是底部的scrolTop的值
+      document.documentElement.scrollTop += i;
+      if (document.documentElement.scrollTop < height) {
+        let c = setTimeout(() => this.dropToBottom(i), 16);
+      } else {
+        clearTimeout(c);
+      }
     }
   }
 };
@@ -56,6 +71,31 @@ export default {
   background-size: 100% 100%;
   background-position: left;
   background-image: url("../../../assets/home-bg.jpg");
+}
+
+.droparrow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  font-size: 50px;
+  color: white;
+  animation: flow 1.5s infinite ease-in-out;
+}
+
+@keyframes flow {
+  0% {
+    opacity: 0.1;
+    transform: translate3d(0, -16px, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate3d(0, -8px, 0);
+  }
+  100% {
+    opacity: 0.1;
+    transform: translate3d(0, 8px, 0);
+  }
 }
 
 .ctitle {
