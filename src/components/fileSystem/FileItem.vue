@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import config from "@utils/config";
+import config from "../../utils/config";
 export default {
   name: "FileItem",
   props: {
