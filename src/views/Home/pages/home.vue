@@ -45,7 +45,7 @@ export default {
       let clientHeight =
         document.documentElement.clientHeight || document.body.clientHeight;
       let scrollHeight = document.documentElement.scrollHeight;
-      let height = scrollHeight - clientHeight; //超出窗口上界的值就是底部的scrolTop的值
+      let height = scrollHeight - clientHeight;
       document.documentElement.scrollTop += i;
       if (document.documentElement.scrollTop < height) {
         let c = setTimeout(() => this.dropToBottom(i), 16);

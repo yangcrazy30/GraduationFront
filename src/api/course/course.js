@@ -41,6 +41,14 @@ export function getCourse(config, courseName) {
   });
 }
 
+export function removeCourse(id) {
+  return axios.post("/course/remove", { id: id });
+}
+
+export function editCourse(course) {
+  return axios.post("/course/edit", course);
+}
+
 export function getCourseStudents(config, courseId) {
   return axios.get("/course/students", {
     params: {
