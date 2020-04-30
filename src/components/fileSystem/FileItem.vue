@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import config from "@utils/config";
 export default {
   name: "FileItem",
   props: {
@@ -15,11 +16,7 @@ export default {
   },
   methods: {
     download() {
-      let path =
-        "http://127.0.0.1:3000/resource/" +
-        this.$route.params.id +
-        "/" +
-        this.file.path;
+      let path = config.baseURL + this.$route.params.id + "/" + this.file.path;
       window.open(path);
     }
   }
