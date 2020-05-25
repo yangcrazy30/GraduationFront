@@ -16,7 +16,12 @@ export default {
   },
   methods: {
     download() {
-      let path = config.baseURL + this.$route.params.id + "/" + this.file.path;
+      let path =
+        config.baseURL +
+        "/resource/" +
+        this.$route.params.id +
+        "/" +
+        this.file.path;
       window.open(path);
     }
   }
