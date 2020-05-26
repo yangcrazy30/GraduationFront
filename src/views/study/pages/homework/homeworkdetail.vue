@@ -51,10 +51,11 @@ export default {
   },
   methods: {
     async getHomeWork() {
-      const res = await getHomeworkById(this.$route.params.homeworkid);
+      const res = await getHomeworkById(this.$route.params.id);
       this.homework = res.data.data;
       this.disable =
-        new Date(this.homework.endTime).getTime() < new Date().getTime();
+        new Date(this.homework.endTime).getTime() < new Date().getTime() ||
+        this.$route.params.status !== "未完成";
       for (let i = 0; i < this.homework.questions.length; i++) {
         let question = this.homework.questions[i];
         this.form.questions.push({
@@ -74,6 +75,15 @@ export default {
             homeworkId: this.$route.params.homeworkid,
             grade: grade
           });
+          if (res.data.success) {
+            this.$message({
+              type: "success",
+              message: "提交成功"
+            });
+            this.$router.push({
+              name: "homework"
+            });
+          }
         } else {
           return false;
         }

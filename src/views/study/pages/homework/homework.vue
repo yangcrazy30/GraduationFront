@@ -91,6 +91,17 @@ export default {
         endTime: this.homeworkForm.time[1],
         courseId: this.$route.params.id
       });
+      if (res.data.success) {
+        this.$message({
+          type: "success",
+          message: "添加成功"
+        });
+        this.homeworkForm = {
+          questions: [],
+          time: [],
+          name: ""
+        };
+      }
     },
     async checkCourseTeacher() {
       const res = await getCourseById(this.$route.params.id);
@@ -111,10 +122,10 @@ export default {
         this.homeworkForm.questions.splice(index, 1);
       }
     },
-    doHomework(id) {
+    doHomework(p) {
       this.$router.push({
         name: "homeworkdetail",
-        params: { homeworkid: id }
+        params: p
       });
     },
     async getHomework() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="main-box">
     <div class="cleft">
       <chatRemain
         v-for="item in userInfos"
@@ -113,7 +113,7 @@ export default {
 </script>
 
 <style scoped>
-.box {
+.main-box {
   height: 100%;
   display: flex;
   flex-direction: row;
