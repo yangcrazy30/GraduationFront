@@ -48,10 +48,58 @@ export default {
   data() {
     return {
       avtiveIndex: "0",
-      menus: [{}]
+      menus: [{}],
+      _beforeUnload_time: 0,
+      _gap_time: 0
     };
   },
+  mounted() {
+    window.addEventListener("beforeunload", e => {
+      this.beforeunloadHandler(e);
+      let userAgent = navigator.userAgent;
+      let isOpera = userAgent.indexOf("Opera") > -1;
+      if (isOpera) {
+        //判断是否Opera浏览器
+        return "Opera";
+      }
+      if (userAgent.indexOf("Firefox") > -1) {
+        this.unloadHandler();
+      } else if (
+        userAgent.indexOf("compatible") > -1 &&
+        userAgent.indexOf("MSIE") > -1 &&
+        !isOpera
+      ) {
+        e = e ? e : window.event ? window.event : null;
+        var cy = e.clientY || e.target.event.clientY;
+        var ak = e.altKey || e.target.event.altKey;
+        if (cy < 0 || ak) {
+          this.unloadHandler();
+        }
+      }
+    });
+    window.addEventListener("unload", async e => {
+      this.unloadHandler(e);
+    });
+  },
+  destroyed() {
+    window.removeEventListener("beforeunload", e =>
+      this.beforeunloadHandler(e)
+    );
+    window.removeEventListener("unload", e => this.unloadHandler(e));
+  },
   methods: {
+    beforeunloadHandler(e) {
+      this._beforeUnload_time = new Date().getTime();
+    },
+    unloadHandler(e) {
+      this._gap_time = new Date().getTime() - this._beforeUnload_time;
+
+      //判断是窗口关闭还是刷新
+      localStorage.setItem("time", this._gap_time);
+      if (this._gap_time <= 5) {
+        localStorage.removeItem("ujs");
+      }
+    },
     handleNavSelect(key, keyPath) {
       this.$router.push({ name: key });
     },
