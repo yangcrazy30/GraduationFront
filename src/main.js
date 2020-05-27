@@ -8,10 +8,11 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import VueSocketIO from 'vue-socket.io'
 import ZeoUi from "ziyao-ui";
+import config from "./utils/config";
 
 Vue.use(new VueSocketIO({
-  debug: false,
-  connection: 'http://101.200.209.120:3000',
+  debug: true,
+  connection: config.baseURL,
 }))
 
 Vue.use(ElementUI);

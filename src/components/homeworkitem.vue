@@ -39,8 +39,7 @@ export default {
   },
   methods: {
     doHomework() {
-      const params = { id: this.homework.id, status: this.grade.status };
-      this.$emit("dowork", params);
+      this.$emit("dowork", this.homework.id);
     },
     async getStatus() {
       const res = await getHomeWorkSatus(this.homework.id);

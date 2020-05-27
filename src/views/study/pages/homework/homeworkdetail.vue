@@ -35,7 +35,11 @@
 </template>
 
 <script>
-import { getHomeworkById, submitHomework } from "api/homework/homework";
+import {
+  getHomeworkById,
+  submitHomework,
+  getHomeWorkSatus
+} from "api/homework/homework";
 export default {
   data() {
     return {
@@ -43,19 +47,21 @@ export default {
       form: {
         questions: []
       },
-      disable: false
+      disable: false,
+      status: "未完成"
     };
   },
   async mounted() {
+    await this.getStatus();
     await this.getHomeWork();
   },
   methods: {
     async getHomeWork() {
-      const res = await getHomeworkById(this.$route.params.id);
+      const res = await getHomeworkById(this.$route.params.homeworkid);
       this.homework = res.data.data;
       this.disable =
         new Date(this.homework.endTime).getTime() < new Date().getTime() ||
-        this.$route.params.status !== "未完成";
+        this.status != "未完成";
       for (let i = 0; i < this.homework.questions.length; i++) {
         let question = this.homework.questions[i];
         this.form.questions.push({
@@ -96,6 +102,10 @@ export default {
           number++;
       }
       return number;
+    },
+    async getStatus() {
+      let res = await getHomeWorkSatus(this.$route.params.homeworkid);
+      this.status = res.data.data.status;
     }
   }
 };

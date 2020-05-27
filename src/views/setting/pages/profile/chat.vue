@@ -51,8 +51,12 @@ export default {
     };
   },
   async mounted() {
+    this.$socket.emit("join", this.$store.state.account.id);
     await this.getMessageSender();
     await this.receiveMessage();
+  },
+  destroyed() {
+    this.$socket.emit("disconnect");
   },
   methods: {
     async handleChat(item) {

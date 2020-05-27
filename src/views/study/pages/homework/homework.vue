@@ -122,10 +122,10 @@ export default {
         this.homeworkForm.questions.splice(index, 1);
       }
     },
-    doHomework(p) {
+    doHomework(homeworkid) {
       this.$router.push({
         name: "homeworkdetail",
-        params: p
+        params: { homeworkid: homeworkid }
       });
     },
     async getHomework() {
